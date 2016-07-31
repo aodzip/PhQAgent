@@ -22,7 +22,7 @@ if exist PhQAgent.phar (
 )
 
 if exist bin\mintty.exe (
-	start "" bin\mintty.exe -o Columns=88 -o Rows=32 -o AllowBlinking=0 -o FontQuality=3 -o Font="DejaVu Sans Mono" -o FontHeight=12 -o CursorType=0 -o CursorBlinks=1 -h error -t "PhQAgent" -w max %PHP_BINARY% %PHQAGENT_FILE% %*
+	start "" bin\mintty.exe -o Columns=88 -o Rows=32 -o AllowBlinking=0 -o FontQuality=3 -o Font="DejaVu Sans Mono" -o Transparency=3 -o FontHeight=12 -o CursorType=0 -o CursorBlinks=1 -h error -t "PhQAgent" -w max %PHP_BINARY% %PHQAGENT_FILE% %*
 ) else (
 	%PHP_BINARY% -c bin\php %PHQAGENT_FILE% %*
 )

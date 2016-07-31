@@ -4,7 +4,7 @@ PHP开发的WebQQ协议支持插件的机器人框架
 
 ## 怎么运行
  - 你是怎么跑PM的？就怎么跑这个就好了……
- - 你没用过PM?->bin文件夹下载后解压到同一目录运行start.bat
+ - 你没用过PM?->bin文件夹下载后解压到同一目录运行start.cmd
  - http://pan.baidu.com/s/1bTlIt4
 
 ## 如何编写插件
