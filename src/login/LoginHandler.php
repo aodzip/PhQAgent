@@ -1,5 +1,6 @@
 <?php
 namespace login;
+use utils\TextFormat;
 use element\GroupList;
 use module\GetSelfInfo;
 use module\GetRecentList;
@@ -27,7 +28,7 @@ class LoginHandler{
             $this->getLogger()->info('开始扫码登录...');
             $this->realLogin();
         }
-        $this->getLogger()->info('Uin: ' . SavedSession::$uin . '登录成功!');
+        $this->getLogger()->success('QQ账号[' . trim(SavedSession::$uin, 'o') . ']登录成功!');
         (new GetSelfInfo($this->server))->getInfo();
         (new GetRecentList($this->server))->getRecentList();
         new GroupList();
