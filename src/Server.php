@@ -28,11 +28,11 @@ class Server{
         $this->logger->info("正在尝试登录WebQQ...");
         $this->session = (new LoginHandler($this))->login();
         $this->sender = new MessageSender($this);
+        $this->receiver = new MessageReceiver($this);
         $this->logger->info("正在加载插件...");
         $this->pluginmanager = new PluginManager($this);
         $this->pluginmanager->load();
         $this->logger->info("正在加载消息收发接口...");
-        $this->receiver = new MessageReceiver($this);
         $this->sender->start();
         $this->receiver->start();
         $this->logger->info("服务端启动完成!");
@@ -40,6 +40,10 @@ class Server{
             $this->pluginmanager->doTick();
             sleep(1);
         }
+    }
+
+    public function getReceiver(){
+        return $this->receiver;
     }
 
     public function getSender(){

@@ -21,6 +21,10 @@ class User{
         }
     }
 
+    public function getUin(){
+        return $this->uin;
+    }
+
     public function getNick($group = null){
         if($group instanceof Group){
             return $this->getCard($group);

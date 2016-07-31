@@ -1,7 +1,7 @@
 <?php
 namespace plugin;
 use element\Message;
-class PluginManager extends \Thread{
+class PluginManager{
 
     private $server;
     private $plugins = [];
@@ -13,23 +13,24 @@ class PluginManager extends \Thread{
         $this->message = [];
     }
 
+    public function getMessage(){
+        return $this->message;
+    }
+
     public function doTick(){
         foreach($this->ticks as $plugin){
             $plugin->onTick();
         }
-        if(count($this->message) !== 0){
-            $tmp = (array)$this->message;
+        $msgs = $this->server->getReceiver()->getMessage();
+        if(count($msgs) !== 0){
+            $tmp = (array)$msgs;
             foreach($tmp as $key => $msg){
                 foreach($this->plugins as $plugin){
                     $plugin->onReceive(new Message(unserialize($msg)));
                 }
-                unset($this->message[$key]);
+                $this->server->getReceiver()->delMessage($key);
             }
         }
-    }
-
-    public function onMessageReceive($message){
-        $this->message[] = serialize($message);
     }
 
     public function load(){

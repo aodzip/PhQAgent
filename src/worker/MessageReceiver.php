@@ -8,12 +8,21 @@ class MessageReceiver extends \Thread{
     private $server;
     private $logger;
     private $pluginmanager;
+    private $message;
 
     public function __construct(\Server $server){
         $this->server = $server;
         $this->logger = $server->getLogger();
-        $this->pluginmanager = $server->getPluginManager();
+        $this->message = [];
         new Curl();
+    }
+
+    public function getMessage(){
+        return $this->message;
+    }
+
+    public function delMessage($key){
+        unset($this->message[$key]);
     }
 
     public function run(){
@@ -63,7 +72,7 @@ class MessageReceiver extends \Thread{
                         break;
                 }
                 $this->logger->info($message['content']);
-                $this->pluginmanager->onMessageReceive($message);
+                $this->message[] = serialize($message);
             }
         }
     }
